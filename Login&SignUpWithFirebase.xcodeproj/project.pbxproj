@@ -18,6 +18,9 @@
 		3454608F2822A38000566567 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3454608E2822A38000566567 /* CustomTextField.swift */; };
 		345460912822A54200566567 /* AuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 345460902822A54200566567 /* AuthButton.swift */; };
 		345460932822AC4E00566567 /* DividerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 345460922822AC4E00566567 /* DividerView.swift */; };
+		961418FD2829F92E00D07767 /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961418FC2829F92E00D07767 /* RegistrationController.swift */; };
+		961418FF282A03DD00D07767 /* ResetPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961418FE282A03DD00D07767 /* ResetPasswordController.swift */; };
+		96141901282A140300D07767 /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96141900282A140300D07767 /* AuthenticationViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +37,9 @@
 		3454608E2822A38000566567 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		345460902822A54200566567 /* AuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthButton.swift; sourceTree = "<group>"; };
 		345460922822AC4E00566567 /* DividerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerView.swift; sourceTree = "<group>"; };
+		961418FC2829F92E00D07767 /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
+		961418FE282A03DD00D07767 /* ResetPasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordController.swift; sourceTree = "<group>"; };
+		96141900282A140300D07767 /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AuthenticationViewModel.swift; path = "Login&SignUpWithFirebase/Controller/AuthenticationViewModel.swift"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +93,8 @@
 			isa = PBXGroup;
 			children = (
 				3454608A28229A5800566567 /* LoginController.swift */,
+				961418FC2829F92E00D07767 /* RegistrationController.swift */,
+				961418FE282A03DD00D07767 /* ResetPasswordController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -94,6 +102,7 @@
 		3454608428229A0100566567 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				96141900282A140300D07767 /* AuthenticationViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -201,12 +210,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				3454608D28229E9C00566567 /* Extensions.swift in Sources */,
+				961418FD2829F92E00D07767 /* RegistrationController.swift in Sources */,
 				345460912822A54200566567 /* AuthButton.swift in Sources */,
 				34546072282299DD00566567 /* ViewController.swift in Sources */,
+				96141901282A140300D07767 /* AuthenticationViewModel.swift in Sources */,
 				3454608F2822A38000566567 /* CustomTextField.swift in Sources */,
 				3454608B28229A5800566567 /* LoginController.swift in Sources */,
 				3454606E282299DD00566567 /* AppDelegate.swift in Sources */,
 				345460932822AC4E00566567 /* DividerView.swift in Sources */,
+				961418FF282A03DD00D07767 /* ResetPasswordController.swift in Sources */,
 				34546070282299DD00566567 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

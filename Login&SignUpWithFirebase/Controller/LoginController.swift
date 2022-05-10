@@ -9,6 +9,10 @@ import UIKit
 
 class LoginController: UIViewController {
     
+    //MARK: -Properties
+    
+    private var viewModel = LoginViewModel()
+    
     private let iconImage = UIImageView(image: #imageLiteral(resourceName: "firebase-logo"))
     
     private let emailTextField:CustomTextField = {
@@ -27,8 +31,10 @@ class LoginController: UIViewController {
         //addTarget은 #selector를 위해서
         button.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        button.title = "Log In"
         return button
     }()
+    
     
     private let forgotPasswordButton: UIButton = {
         let button = UIButton(type: .system)
@@ -70,7 +76,7 @@ class LoginController: UIViewController {
         
         button.setAttributedTitle(attributedTitle, for: .normal)
         
-        button.addTarget(self, action: #selector(showForgotPassword), for: .touchUpInside)
+        button.addTarget(self, action: #selector(showRegistrationController), for: .touchUpInside)
         
         return button
     }()
@@ -79,16 +85,19 @@ class LoginController: UIViewController {
     override func viewDidLoad() {
         super .viewDidLoad()
         configureUI()
+        configureNotificationObservers()
     }
     
     //MARK: - Selectors
     @objc
     func handleLogin() {
-        
+        print("aa")
     }
     
     @objc
     func showForgotPassword() {
+        let controller = ResetPasswordController()
+        navigationController?.pushViewController(controller, animated: true)
         
     }
     
@@ -97,21 +106,34 @@ class LoginController: UIViewController {
         
     }
     
+    @objc func showRegistrationController() {
+        let controller = RegistrationController()
+        navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    @objc
+    func textDidChange(_ sender: UITextField) {
+        if sender == emailTextField {
+            viewModel.email = sender.text
+        } else {
+            viewModel.password = sender.text
+        }
+        updateForm()
+    }
     //MARK: -Helpers
     
     func configureUI() {
-        let gradient = CAGradientLayer()
-        gradient.colors = [UIColor.systemPurple.cgColor, UIColor.systemBlue.cgColor]
-        gradient.locations = [0,1]
-        view.layer.addSublayer(gradient)
-        gradient.frame = view.frame
+        navigationController?.navigationBar.isHidden = true
+        navigationController?.navigationBar.barStyle = .black
+        
+        configureGradientBackground()
         
         view.addSubview(iconImage)
         iconImage.centerX(inView: view)
         iconImage.setDimensions(height: 120, width: 120)
         iconImage.anchor(top:view.safeAreaLayoutGuide.topAnchor,paddingTop: 32)
         
-        let stack = UIStackView(arrangedSubviews: [emailTextField, passwordTextField, loginButton, forgotPasswordButton, dividerView])
+        let stack = UIStackView(arrangedSubviews: [emailTextField, passwordTextField, loginButton, forgotPasswordButton])
         
         stack.axis = .vertical
         stack.spacing = 20
@@ -131,5 +153,20 @@ class LoginController: UIViewController {
         view.addSubview(dontHaveAccountButton)
         dontHaveAccountButton.centerX(inView: view)
         dontHaveAccountButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor)
+    }
+    
+    func configureNotificationObservers() {
+        emailTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+    }
+}
+//MARK: - FormViewModel
+
+extension LoginController:FormViewModel {
+    
+    func updateForm() {
+        loginButton.isEnabled = viewModel.shouldEnableButton
+        loginButton.backgroundColor = viewModel.buttonBackgroundColor
+        loginButton.setTitleColor(viewModel.buttonTitleColor, for: .normal)
     }
 }
