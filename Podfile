@@ -9,7 +9,7 @@ target 'Login&SignUpWithFirebase' do
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
   pod 'JGProgressHUD','~>2.0.3'
-  pod 'GoogleSignIn'
+  pod 'GoogleSignIn' ,'~> 5.0'
   pod 'Firebase/Database'
   pod 'paper-onboarding'
 
