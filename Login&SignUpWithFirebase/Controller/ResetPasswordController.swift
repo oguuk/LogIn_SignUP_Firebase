@@ -53,8 +53,12 @@ class ResetPasswordController:UIViewController {
     func handleResetPassword() {
         guard let email = email else {return}
         
+        showLoader(true)
+        
         Service.resetPassword(forEmail: email) { error in
+            
             if let error = error {
+                self.showLoader(false)
                 print("DEBUG: Failed to resset password \(error.localizedDescription)")
                 return
             }

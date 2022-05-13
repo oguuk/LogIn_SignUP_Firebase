@@ -20,6 +20,7 @@ struct Service {
         Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
             if let error = error {
                 print("DEBUG: Failed to create user with error: \(error.localizedDescription)")
+                completion(error, REF_USERS)
                 return
             }
             guard let uid = result?.user.uid else {return}
@@ -37,6 +38,7 @@ struct Service {
         Auth.auth().signIn(with: credential) { (result, error) in
             if let error = error {
                 print("DEBUG: Failed to sign in with google: \(error.localizedDescription)")
+                completion(error, REF_USERS)
                 return
             }
             

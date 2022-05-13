@@ -65,7 +65,12 @@ class RegistrationController:UIViewController {
         guard let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
         guard let fullname = fullnameTextField.text else { return }
+        
+        showLoader(true)
+        
         Service.registerUserWithFirebase(withEmail: email, password: password, fullname: fullname) { (error,ref) in
+            self.showLoader(false)
+
             if let error = error {
                 print("DEBUG: Error signing in \(error.localizedDescription)")
                 return
