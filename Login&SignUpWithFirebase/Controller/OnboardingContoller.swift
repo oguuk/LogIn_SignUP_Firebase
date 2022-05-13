@@ -8,8 +8,15 @@
 import paper_onboarding
 import UIKit
 
+protocol OnboardingControllerDelegate: class {
+    func controllerWantsToDismiss(_ controller: OnboardingContoller)
+}
+
 class OnboardingContoller:UIViewController {
     //MARK: - Properties
+    
+    
+    weak var delegate: OnboardingControllerDelegate?
     private var onboardingItems = [OnboardingItemInfo]()
     private var onboardingView = PaperOnboarding()
     
@@ -38,7 +45,7 @@ class OnboardingContoller:UIViewController {
     
     @objc
     func dismissOnboarding() {
-        
+        delegate?.controllerWantsToDismiss(self)
     }
     
     //MARK: -Helpers

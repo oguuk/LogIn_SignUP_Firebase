@@ -25,6 +25,7 @@
 		96141905282ABD2100D07767 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96141904282ABD2100D07767 /* HomeController.swift */; };
 		967C1BE3282E0BB00048BB15 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967C1BE2282E0BB00048BB15 /* Constants.swift */; };
 		967C1BE5282E20990048BB15 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967C1BE4282E20990048BB15 /* OnboardingViewModel.swift */; };
+		967C1BE7282E38DF0048BB15 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967C1BE6282E38DF0048BB15 /* User.swift */; };
 		96BFD3EE282B68390037C316 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96BFD3ED282B68390037C316 /* Service.swift */; };
 		96E6DE72282D1CA100E8F6AC /* OnboardingContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E6DE71282D1CA100E8F6AC /* OnboardingContoller.swift */; };
 		96E6DE74282D211700E8F6AC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 96E6DE73282D211700E8F6AC /* GoogleService-Info.plist */; };
@@ -51,6 +52,7 @@
 		96141904282ABD2100D07767 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		967C1BE2282E0BB00048BB15 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		967C1BE4282E20990048BB15 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OnboardingViewModel.swift; path = "Login&SignUpWithFirebase/Utils/OnboardingViewModel.swift"; sourceTree = SOURCE_ROOT; };
+		967C1BE6282E38DF0048BB15 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = User.swift; path = "Login&SignUpWithFirebase/Utils/User.swift"; sourceTree = SOURCE_ROOT; };
 		96BFD3ED282B68390037C316 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Service.swift; path = "Login&SignUpWithFirebase/Controller/Service.swift"; sourceTree = SOURCE_ROOT; };
 		96E6DE71282D1CA100E8F6AC /* OnboardingContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingContoller.swift; sourceTree = "<group>"; };
 		96E6DE73282D211700E8F6AC /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -152,6 +154,7 @@
 		3454608728229A0600566567 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				967C1BE6282E38DF0048BB15 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -321,6 +324,7 @@
 				345460912822A54200566567 /* AuthButton.swift in Sources */,
 				34546072282299DD00566567 /* ViewController.swift in Sources */,
 				967C1BE3282E0BB00048BB15 /* Constants.swift in Sources */,
+				967C1BE7282E38DF0048BB15 /* User.swift in Sources */,
 				96141901282A140300D07767 /* AuthenticationViewModel.swift in Sources */,
 				3454608F2822A38000566567 /* CustomTextField.swift in Sources */,
 				3454608B28229A5800566567 /* LoginController.swift in Sources */,

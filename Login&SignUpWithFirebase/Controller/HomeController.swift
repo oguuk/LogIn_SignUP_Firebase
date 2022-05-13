@@ -9,7 +9,23 @@ import UIKit
 import Firebase
 
 class HomeController:UIViewController {
+    
     //MARK: -Properties
+    private var user: User? {
+        didSet {
+            presentOnboardingIfNeccessary()
+            showWelcomeLabel()
+        }
+    }
+    
+    private let welcomeLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.font = UIFont.systemFont(ofSize: 28)
+        label.text = "Welcom User"
+        label.alpha = 0
+        return label
+    }()
     
     //MARK: -Lifecycle
     override func viewDidLoad() {
@@ -33,6 +49,12 @@ class HomeController:UIViewController {
     
     //MARK: -API
     
+    func fetchUser() {
+        Service.fetchUser { user in
+            self.user = user
+        }
+    }
+    
     func logout() {
         do {
             try Auth.auth().signOut()
@@ -41,13 +63,7 @@ class HomeController:UIViewController {
             print("DEBUG: Error signing out")
         }
     }
-    
-    fileprivate func presentLoginController() { //마우스 우측 클릭 -> Refactor -> Method
-        let controller = LoginController()
-        let nav = UINavigationController(rootViewController: controller)
-        nav.modalPresentationStyle = .fullScreen
-        self.present(nav, animated: true, completion: nil)
-    }
+
     
     func authenticateUser() {
         if Auth.auth().currentUser?.uid == nil {
@@ -55,7 +71,8 @@ class HomeController:UIViewController {
                 self.presentLoginController()
             }
         } else {
-            print("DEBUG: User is logged in..")
+            fetchUser()
+            
         }
     }
     
@@ -71,5 +88,45 @@ class HomeController:UIViewController {
         let image = UIImage(systemName: "arrow.left")
         navigationItem.leftBarButtonItem =  UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(handleLogout))
         navigationItem.leftBarButtonItem?.tintColor = .white
+        
+        view.addSubview(welcomeLabel)
+        welcomeLabel.centerX(inView: view)
+        welcomeLabel.centerY(inView: view)
+    }
+    
+    fileprivate func showWelcomeLabel() {
+        guard let user = user else {return}
+        
+        welcomeLabel.text = "Welcome, \(user.fullname)"
+        
+        UIView.animate(withDuration: 1) {
+            self.welcomeLabel.alpha = 1
+        }
+    }
+    
+    fileprivate func presentLoginController() { //마우스 우측 클릭 -> Refactor -> Method
+        let controller = LoginController()
+        let nav = UINavigationController(rootViewController: controller)
+        nav.modalPresentationStyle = .fullScreen
+        self.present(nav, animated: true, completion: nil)
+    }
+    
+    fileprivate func presentOnboardingIfNeccessary() {
+        guard let user = user else { return }
+        guard !user.hasSeenOnboarding else {return}
+        let controller = OnboardingContoller()
+        controller.delegate = self
+        controller.modalPresentationStyle = .fullScreen
+        present(controller, animated: true,completion: nil)
+    }
+}
+
+extension HomeController: OnboardingControllerDelegate {
+    func controllerWantsToDismiss(_ controller: OnboardingContoller) {
+        controller.dismiss(animated: true, completion: nil)
+        
+        Service.updateUserHasSeenOnboarding { (error, ref) in
+            self.user?.hasSeenOnboarding = true
+        }
     }
 }
