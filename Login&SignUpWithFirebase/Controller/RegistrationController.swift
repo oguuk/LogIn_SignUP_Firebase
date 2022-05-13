@@ -68,9 +68,17 @@ class RegistrationController:UIViewController {
         
         showLoader(true)
         
-        Service.registerUserWithFirebase(withEmail: email, password: password, fullname: fullname) { (error,ref) in
-            self.showLoader(false)
-
+//        Service.registerUserWithFirebase(withEmail: email, password: password, fullname: fullname) { (error,ref) in
+//            self.showLoader(false)
+//
+//            if let error = error {
+//                self.showMessage(withTitle: "Error", message: error.localizedDescription)
+//                return
+//            }
+//            self.delegate?.authenticationComplete()
+//        }
+        
+        Service.registerUserWithFirestore(withEmail: email, password: password, fullname: fullname) { error in
             if let error = error {
                 self.showMessage(withTitle: "Error", message: error.localizedDescription)
                 return

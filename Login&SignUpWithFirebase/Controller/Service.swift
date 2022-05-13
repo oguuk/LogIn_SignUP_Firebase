@@ -32,6 +32,24 @@ struct Service {
         }
     }
     
+    static func registerUserWithFirestore(withEmail email: String, password: String, fullname: String, completion: ((Error?) -> Void)?) {
+        Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
+            if let error = error {
+                print("DEBUG: Failed to create user with error: \(error.localizedDescription)")
+                completion!(error)
+                return
+            }
+            
+            guard let uid = result?.user.uid else {return}
+            let values = ["email":email,
+                          "fullname": fullname,
+                          "hasSeenOnboarding": false,
+                          "uid":uid] as [String : Any]
+            
+            Firestore.firestore().collection("users").document(uid).setData(values, completion: completion)
+        }
+    }
+    
     static func signInWithGoogle(didSignInFor user: GIDGoogleUser,completion: @escaping(DatabaseCompletion)) {
         guard let authentication = user.authentication else {return}
         let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,                                                           accessToken: authentication.accessToken)
