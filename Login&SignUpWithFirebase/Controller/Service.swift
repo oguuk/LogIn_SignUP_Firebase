@@ -76,4 +76,8 @@ struct Service {
         guard let uid = Auth.auth().currentUser?.uid else {return}
         REF_USERS.child(uid).child("hasSeenOnboarding").setValue(true, withCompletionBlock: completion)
     }
+    
+    static func resetPassword(forEmail email: String,completion: SendPasswordResetCallback?) {
+        Auth.auth().sendPasswordReset(withEmail: email, completion: completion)
+    }
 }

@@ -7,12 +7,19 @@
 
 import UIKit
 
+protocol ResetPasswordControllerDelegate: class {
+    func didSendResetPasswordLink()
+}
+
 class ResetPasswordController:UIViewController {
     //MARK: -Properties
     private var viewModel = ResetPasswordViewModel()
+    var email: String?
     
     private let iconImage = UIImageView(image: #imageLiteral(resourceName: "firebase-logo"))
     private let emailTextField = CustomTextField(placeholder: "Email")
+    weak var delegate: ResetPasswordControllerDelegate?
+ 
     
     private let resetPasswordButton: AuthButton = {
         let button = AuthButton()
@@ -37,13 +44,23 @@ class ResetPasswordController:UIViewController {
         super.viewDidLoad()
         configureUI()
         configureNotificationObservers()
+        loadEmail()
     }
     
     //MARK: -Selectors
     
     @objc
     func handleResetPassword() {
+        guard let email = email else {return}
         
+        Service.resetPassword(forEmail: email) { error in
+            if let error = error {
+                print("DEBUG: Failed to resset password \(error.localizedDescription)")
+                return
+            }
+            
+            self.delegate?.didSendResetPasswordLink()
+        }
     }
     
     @objc
@@ -79,6 +96,16 @@ class ResetPasswordController:UIViewController {
         
         view.addSubview(stack)
         stack.anchor(top: iconImage.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 32, paddingLeft: 32, paddingRight: 32)
+    }
+    
+    func loadEmail() {
+        guard let email = email else {return}
+        viewModel.email = email
+        
+        emailTextField.text = email
+        
+        updateForm()
+
     }
     
     func configureNotificationObservers() {
