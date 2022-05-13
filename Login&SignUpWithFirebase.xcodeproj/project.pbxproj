@@ -23,6 +23,8 @@
 		961418FF282A03DD00D07767 /* ResetPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961418FE282A03DD00D07767 /* ResetPasswordController.swift */; };
 		96141901282A140300D07767 /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96141900282A140300D07767 /* AuthenticationViewModel.swift */; };
 		96141905282ABD2100D07767 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96141904282ABD2100D07767 /* HomeController.swift */; };
+		967C1BE3282E0BB00048BB15 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967C1BE2282E0BB00048BB15 /* Constants.swift */; };
+		967C1BE5282E20990048BB15 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967C1BE4282E20990048BB15 /* OnboardingViewModel.swift */; };
 		96BFD3EE282B68390037C316 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96BFD3ED282B68390037C316 /* Service.swift */; };
 		96E6DE72282D1CA100E8F6AC /* OnboardingContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E6DE71282D1CA100E8F6AC /* OnboardingContoller.swift */; };
 		96E6DE74282D211700E8F6AC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 96E6DE73282D211700E8F6AC /* GoogleService-Info.plist */; };
@@ -47,6 +49,8 @@
 		961418FE282A03DD00D07767 /* ResetPasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordController.swift; sourceTree = "<group>"; };
 		96141900282A140300D07767 /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AuthenticationViewModel.swift; path = "Login&SignUpWithFirebase/Controller/AuthenticationViewModel.swift"; sourceTree = SOURCE_ROOT; };
 		96141904282ABD2100D07767 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
+		967C1BE2282E0BB00048BB15 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		967C1BE4282E20990048BB15 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OnboardingViewModel.swift; path = "Login&SignUpWithFirebase/Utils/OnboardingViewModel.swift"; sourceTree = SOURCE_ROOT; };
 		96BFD3ED282B68390037C316 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Service.swift; path = "Login&SignUpWithFirebase/Controller/Service.swift"; sourceTree = SOURCE_ROOT; };
 		96E6DE71282D1CA100E8F6AC /* OnboardingContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingContoller.swift; sourceTree = "<group>"; };
 		96E6DE73282D211700E8F6AC /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -121,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				96141900282A140300D07767 /* AuthenticationViewModel.swift */,
+				967C1BE4282E20990048BB15 /* OnboardingViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -139,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				3454608C28229E9C00566567 /* Extensions.swift */,
+				967C1BE2282E0BB00048BB15 /* Constants.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -311,8 +317,10 @@
 				3454608D28229E9C00566567 /* Extensions.swift in Sources */,
 				96BFD3EE282B68390037C316 /* Service.swift in Sources */,
 				961418FD2829F92E00D07767 /* RegistrationController.swift in Sources */,
+				967C1BE5282E20990048BB15 /* OnboardingViewModel.swift in Sources */,
 				345460912822A54200566567 /* AuthButton.swift in Sources */,
 				34546072282299DD00566567 /* ViewController.swift in Sources */,
+				967C1BE3282E0BB00048BB15 /* Constants.swift in Sources */,
 				96141901282A140300D07767 /* AuthenticationViewModel.swift in Sources */,
 				3454608F2822A38000566567 /* CustomTextField.swift in Sources */,
 				3454608B28229A5800566567 /* LoginController.swift in Sources */,
