@@ -63,7 +63,6 @@ class HomeController:UIViewController {
             print("DEBUG: Error signing out")
         }
     }
-
     
     func authenticateUser() {
         if Auth.auth().currentUser?.uid == nil {
@@ -96,6 +95,7 @@ class HomeController:UIViewController {
     
     fileprivate func showWelcomeLabel() {
         guard let user = user else {return}
+        guard user.hasSeenOnboarding else {return}
         
         welcomeLabel.text = "Welcome, \(user.fullname)"
         
@@ -106,6 +106,7 @@ class HomeController:UIViewController {
     
     fileprivate func presentLoginController() { //마우스 우측 클릭 -> Refactor -> Method
         let controller = LoginController()
+        controller.delegate = self
         let nav = UINavigationController(rootViewController: controller)
         nav.modalPresentationStyle = .fullScreen
         self.present(nav, animated: true, completion: nil)
@@ -121,6 +122,8 @@ class HomeController:UIViewController {
     }
 }
 
+//MARK: - OnboardingControllerDelegate
+
 extension HomeController: OnboardingControllerDelegate {
     func controllerWantsToDismiss(_ controller: OnboardingContoller) {
         controller.dismiss(animated: true, completion: nil)
@@ -129,4 +132,12 @@ extension HomeController: OnboardingControllerDelegate {
             self.user?.hasSeenOnboarding = true
         }
     }
+}
+
+extension HomeController: AuthenticationDelegate {
+    func authenticationComplete() {
+        dismiss(animated: true, completion: nil)
+        fetchUser()
+    }
+    
 }

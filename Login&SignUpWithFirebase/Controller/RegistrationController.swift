@@ -12,6 +12,7 @@ class RegistrationController:UIViewController {
     
     //MARK: -Properties
     private var viewModel = RegistrationViewModel()
+    weak var delegate: AuthenticationDelegate?
     
     private let iconImage = UIImageView(image: #imageLiteral(resourceName: "firebase-logo"))
     
@@ -69,7 +70,7 @@ class RegistrationController:UIViewController {
                 print("DEBUG: Error signing in \(error.localizedDescription)")
                 return
             }
-            self.dismiss(animated: true, completion: nil)
+            self.delegate?.authenticationComplete()
         }
     }
     

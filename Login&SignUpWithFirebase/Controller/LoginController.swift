@@ -9,11 +9,16 @@ import UIKit
 import Firebase
 import GoogleSignIn
 
+protocol AuthenticationDelegate: class {
+    func authenticationComplete()
+}
+
 class LoginController: UIViewController {
     
     //MARK: -Properties
     
     private var viewModel = LoginViewModel()
+    weak var delegate: AuthenticationDelegate?
     
     private let iconImage = UIImageView(image: #imageLiteral(resourceName: "firebase-logo"))
     
@@ -104,7 +109,7 @@ class LoginController: UIViewController {
                 return
             }
             
-            self.dismiss(animated: true, completion: nil)
+            self.delegate?.authenticationComplete()
         }
         
         Service.logUserIn(withEmail: email, password: password) { result, error in
@@ -131,7 +136,8 @@ class LoginController: UIViewController {
     
     @objc func showRegistrationController() {
         let controller = RegistrationController()
-        navigationController?.pushViewController(controller, animated: true)
+        controller.delegate = delegate
+        navigationController?.pushViewController(controller, animated: true)        
     }
     
     @objc
@@ -202,7 +208,7 @@ extension LoginController:FormViewModel {
 extension LoginController:GIDSignInDelegate {
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         Service.signInWithGoogle(didSignInFor: user) { error, ref in
-            self.dismiss(animated: true, completion: nil)
+            self.delegate?.authenticationComplete()
         }
     }
 }
