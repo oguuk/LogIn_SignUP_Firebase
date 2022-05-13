@@ -72,7 +72,7 @@ class RegistrationController:UIViewController {
             self.showLoader(false)
 
             if let error = error {
-                print("DEBUG: Error signing in \(error.localizedDescription)")
+                self.showMessage(withTitle: "Error", message: error.localizedDescription)
                 return
             }
             self.delegate?.authenticationComplete()

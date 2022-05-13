@@ -59,7 +59,7 @@ class ResetPasswordController:UIViewController {
             
             if let error = error {
                 self.showLoader(false)
-                print("DEBUG: Failed to resset password \(error.localizedDescription)")
+                self.showMessage(withTitle: "Error", message: error.localizedDescription)
                 return
             }
             
