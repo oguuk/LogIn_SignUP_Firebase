@@ -55,6 +55,12 @@ class HomeController:UIViewController {
         }
     }
     
+    func fetchUserWithFirestore() {
+        Service.fetchUserWithFirestore { user in
+            self.user = user
+        }
+    }
+    
     func logout() {
         do {
             try Auth.auth().signOut()
@@ -70,8 +76,8 @@ class HomeController:UIViewController {
                 self.presentLoginController()
             }
         } else {
-            fetchUser()
-            
+//            fetchUser()
+            fetchUserWithFirestore()
         }
     }
     
@@ -128,7 +134,10 @@ extension HomeController: OnboardingControllerDelegate {
     func controllerWantsToDismiss(_ controller: OnboardingContoller) {
         controller.dismiss(animated: true, completion: nil)
         
-        Service.updateUserHasSeenOnboarding { (error, ref) in
+//        Service.updateUserHasSeenOnboarding { (error, ref) in
+//            self.user?.hasSeenOnboarding = true
+//        }
+        Service.updateUserHasSeenOnboardingFirestore { error in
             self.user?.hasSeenOnboarding = true
         }
     }
@@ -137,7 +146,8 @@ extension HomeController: OnboardingControllerDelegate {
 extension HomeController: AuthenticationDelegate {
     func authenticationComplete() {
         dismiss(animated: true, completion: nil)
-        fetchUser()
+//        fetchUser()
+        fetchUserWithFirestore()
     }
     
 }

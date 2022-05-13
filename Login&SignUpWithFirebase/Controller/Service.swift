@@ -9,6 +9,7 @@ import Firebase
 import GoogleSignIn
 
 typealias DatabaseCompletion = ((Error?, DatabaseReference) -> Void)
+typealias FirestoreCompletion = (Error?) -> Void
 
 struct Service {
     
@@ -32,11 +33,11 @@ struct Service {
         }
     }
     
-    static func registerUserWithFirestore(withEmail email: String, password: String, fullname: String, completion: ((Error?) -> Void)?) {
+    static func registerUserWithFirestore(withEmail email: String, password: String, fullname: String, completion: @escaping FirestoreCompletion) {
         Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
             if let error = error {
                 print("DEBUG: Failed to create user with error: \(error.localizedDescription)")
-                completion!(error)
+                completion(error)
                 return
             }
             
@@ -92,9 +93,28 @@ struct Service {
 
     }
     
+    static func fetchUserWithFirestore(completion: @escaping(User) -> Void) {
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+        
+        Firestore.firestore().collection("users").document(uid).getDocument { (snapshot,error) in
+            print("DEBUG: Snapshot is \(snapshot?.data())")
+            guard let dictionary = snapshot?.data() else { return }
+            let user = User(dictionary: dictionary)
+            completion(user)
+        }
+    }
+    
     static func updateUserHasSeenOnboarding(completion: @escaping(DatabaseCompletion)) {
         guard let uid = Auth.auth().currentUser?.uid else {return}
         REF_USERS.child(uid).child("hasSeenOnboarding").setValue(true, withCompletionBlock: completion)
+    }
+    
+    static func updateUserHasSeenOnboardingFirestore(completion: @escaping(FirestoreCompletion)) {
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+        
+        let data = ["gasSeenOnboarding": true]
+        
+        Firestore.firestore().collection("users").document(uid).updateData(data, completion: completion)
     }
     
     static func resetPassword(forEmail email: String,completion: SendPasswordResetCallback?) {
